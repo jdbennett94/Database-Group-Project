@@ -13,9 +13,10 @@
       tag3 = document.getElementById("tag3");
       tag4 = document.getElementById("tag4");
       tag5 = document.getElementById("tag5");
+      //document.getElementById("errorMsg").innerText = tag1.value.length + tag2.value.length + tag3.value.length + tag4.value.length + tag5.value.length;
 
       if (tag1.value.length + tag2.value.length + tag3.value.length + tag4.value.length + tag5.value.length > 50){
-
+        document.getElementById("errorMsg").innerText = "The length of all the tags combined must be less than 50 characters";
         return false;
       }
       else{
@@ -26,14 +27,13 @@
   </head>
   <body>
     <h4>Start a Thread </h5>
-    <form method="post" action="insertThread.php">
+    <form method="post" action="insertThread.php" onsubmit="return tagsLength()">
       <label for="user">Name:</label>
       <input type="text" id="user" name="user" required>
       <br>
       <label for="body">Body:</label>
       <br>
-      <textarea id="body" name="body" rows="4" cols="50" required>
-      </textarea>
+      <textarea id="body" name="body" rows="4" cols="50" required></textarea>
       <br>
       <label for="tag1">Tag 1:</label>
       <input type="text" id="tag1"  name="tag1">
@@ -48,8 +48,10 @@
       <input type="text" id="tag4" name="tag4" >
       <br>
       <label for="tag5">Tag 5:</label>
-      <input type="text" id="tag5" name="tag5" >
-      <input type="submit" id="submit" name="submit" onsubmit="return tagsLength();">
+      <input type="text" onclick="tagsLength();" id="tag5" name="tag5" >
+      <br>
+      <input type="submit" id="submit" name="submit">
       </form>
+      <div id="errorMsg"></div>
   </body>
 </html>
