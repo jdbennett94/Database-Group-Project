@@ -28,7 +28,7 @@ $result = $mysqli->query($sql);
 #might need to grab all, decode each JSON, and loop over the resulting array
 
 //Html table format see below commented out portion for example
-echo "<table style='width:100%'>";
+echo "<table style='width:100%; text-align:center'>";
 echo "<tr>
       <th>ThreadId</th>
       <th>Thread</th>
