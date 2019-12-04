@@ -19,7 +19,7 @@ if ($mysqli->connect_error) {
 $searchTag = $_POST['searchTag'];
 
 //Query statement array
-$result = mysql_query("SELECT * from Threads where thread like '%$searchTag%'");
+$result = mysql_query("SELECT * from Threads where tags like '%$searchTag%'");
 
 
 
@@ -33,21 +33,24 @@ echo "<tr>
 //Each row of table now
 while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 
+    $thread = json_decode($row['thread']);
     //Beginning of row
     echo "<tr>";
 
     //Thread id index
     echo "<td>";
-    echo $row['threadid'];
+    echo $row['threadId'];
     echo "</td>";
 
     //Thread itself index
     echo "<td>";
-    echo $row['thread'];
+    echo $thread;
     echo "</td>";
 
     echo "</tr>";
 }
+echo "</table> ";
+
 
 /*  <tr>
     <th>Firstname</th>
@@ -67,9 +70,6 @@ while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 </table> "
 */
 
-echo "</table> ";
 ?>
-
-
   </body>
 </html>
