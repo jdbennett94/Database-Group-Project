@@ -3,8 +3,52 @@
   <head>
     <meta charset="utf-8">
     <title>insertThread.html</title>
+    <script>
+
+
+    function tagsLength() {
+      //TODO add stop validation code here or switch to on type wrong Style BAD
+      tag1 = document.getElementById("tag1");
+      tag2 = document.getElementById("tag2");
+      tag3 = document.getElementById("tag3");
+      tag4 = document.getElementById("tag4");
+      tag5 = document.getElementById("tag5");
+
+      if (tag1.value.length + tag2.value.length + tag3.value.length + tag4.value.length + tag5.value.length > 50){
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+    </script>
   </head>
   <body>
-
+    <h4>Start a Thread </h5>
+    <form method="post" action="insertThread.php">
+      <label for="user">Name:</label>
+      <input type="text" id="user" name="user" required>
+      <br>
+      <label for="body">Body:</label>
+      <br>
+      <textarea id="body" name="body" rows="4" cols="50" required>
+      </textarea>
+      <br>
+      <label for="tag1">Tag 1:</label>
+      <input type="text" id="tag1"  name="tag1">
+      <br>
+      <label for="tag2">Tag 2:</label>
+      <input type="text" id="tag2" name="tag2">
+      <br>
+      <label for="tag3">Tag 3:</label>
+      <input type="text" id="tag3" name="tag3">
+      <br>
+      <label for="tag4">Tag 4:</label>
+      <input type="text" id="tag4" name="tag4" >
+      <br>
+      <label for="tag5">Tag 5:</label>
+      <input type="text" id="tag5" name="tag5" >
+      <input type="submit" id="submit" name="submit" onsubmit="return tagsLength();">
+      </form>
   </body>
 </html>
