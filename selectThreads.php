@@ -15,13 +15,39 @@ if ($mysqli->connect_error) {
     die("Connection failed: " .  $mysqli->connect_error);
 }
 
+//Enters post info into variable
 $searchTag = $_POST['searchTag'];
 
-$sqlThread = 'select thread from Threads where thread like '%$searchTag%'';
+//Query statement array
+$result = mysql_query("SELECT * from Threads where thread like '%$searchTag%'");
 
+
+
+//Html table format see below commented out portion for example
 echo "<table style='width:100%'>";
+echo "<tr>
+      <th>ThreadId</th>
+      <th>Thread</th>
+      </tr>";
 
+//Each row of table now
+while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
 
+    //Beginning of row
+    echo "<tr>";
+
+    //Thread id index
+    echo "<td>";
+    echo $row['threadid'];
+    echo "</td>";
+
+    //Thread itself index
+    echo "<td>";
+    echo $row['thread'];
+    echo "</td>";
+
+    echo "</tr>";
+}
 
 /*  <tr>
     <th>Firstname</th>
