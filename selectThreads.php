@@ -7,10 +7,10 @@
   <body>
 
 <?php
-
+//MYSQL connection
 require_once 'config.php';
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-// Check connection
+//Check connection
 if ($mysqli->connect_error) {
     die("Connection failed: " .  $mysqli->connect_error);
 }
@@ -52,6 +52,7 @@ while ($row = $result->fetch_assoc()) {
     //End of row
     echo "</tr>";
 }
+//End of table
 echo "</table> ";
 
 
