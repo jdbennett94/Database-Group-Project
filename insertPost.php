@@ -9,29 +9,29 @@ if ($mysqli->connect_error) {
 
 $post->body = $_POST["body"];
 $post->name = $_POST["userName"];
-$post->id = $_POST["threadId"];
-#$post->datePosted = date("Y-m-d");
+#$post->id = $_POST["threadId"];
+$post->datePosted = date("Y-m-d");
+$sql = "SELECT * FROM Threads WHERE id = ". $_POST["threadId"];
 
+$result = $mysqli->query($sql);
 
+$row = $result->fetch_assoc();
+$thread = json_decode($row['thread']);
+$postArray = $thread->posts;
+$postArray[] = $post;
 
+ $thread->posts = $postArray;
 
-$sql = "SELECT * FROM Donor WHERE donorId = ". $_GET["id"];
+ $newThreadJSON = json_encode($thread);
 
-    $result = $mysqli->query($sql);
-    $row = $result->fetch_assoc();
-
-
-  $thread = $row['thread'];
-  echo $thread;
-/*
-$sql .= 'UPDATE Threads SET thread = '.' \''.$threadJSON.'\' WHERE id = '.$_POST["threadId"].');';
+$sql = "UPDATE Threads SET thread = '".$newThreadJSON."' WHERE `Threads`.`id` =".$_POST["threadId"];
 
   if ($mysqli->query($sql) === TRUE) {
-      $htmlOutput .= "Thread added successfully";
+      $htmlOutput .= "Thread updated successfully";
   }
   else{
-    $htmlOutput .= "Insertion Failed: ". $mysqli->error;
+    $htmlOutput .= "Insertion Failed: ".$sql." ".$mysqli->error;
 
   }
-  echo $htmlOutput;*/
+  echo $htmlOutput;
 ?>

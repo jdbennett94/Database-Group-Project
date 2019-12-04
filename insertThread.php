@@ -23,7 +23,7 @@ $tagsJSON = json_encode($tags);
 $post->body = $_POST["body"];
 $post->name = $_POST["user"];
 $post->datePosted = date("Y-m-d");
-$thread = array($post);
+$thread->posts = array($post);
 
 
 $threadJSON = json_encode($thread);
