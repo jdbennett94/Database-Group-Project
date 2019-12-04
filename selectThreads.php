@@ -19,8 +19,8 @@ if ($mysqli->connect_error) {
 $searchTag = $_POST['searchTag'];
 
 //Query statement array
-$result = mysql_query("SELECT * from Threads where tags like '%$searchTag%'");
-
+$sql = "SELECT * from Threads where tags like '%$searchTag%'";
+$result = $mysqli->query($sql);
 
 
 //Html table format see below commented out portion for example
@@ -31,9 +31,11 @@ echo "<tr>
       </tr>";
 
 //Each row of table now
-while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
+while ($row = $result->fetch_assoc()) {
 
+    //Decode Json thread data
     $thread = json_decode($row['thread']);
+
     //Beginning of row
     echo "<tr>";
 
@@ -47,6 +49,7 @@ while ($row = mysql_fetch_array($result, MYSQL_NUM)) {
     echo $thread;
     echo "</td>";
 
+    //End of row
     echo "</tr>";
 }
 echo "</table> ";
@@ -69,7 +72,6 @@ echo "</table> ";
   </tr>
 </table> "
 */
-
 ?>
   </body>
 </html>
