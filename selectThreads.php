@@ -18,9 +18,13 @@ if ($mysqli->connect_error) {
 //Enters post info into variable
 $searchTag = $_POST['searchTag'];
 
+
+
 //Query statement array
 $sql = "SELECT * from Threads where tags like '%$searchTag%'";
 $result = $mysqli->query($sql);
+
+
 
 
 //Html table format see below commented out portion for example
