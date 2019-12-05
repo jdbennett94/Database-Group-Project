@@ -42,9 +42,6 @@ $searchTag = $_POST['searchTag'];
 $sql = "SELECT * from Threads where tags like '%$searchTag%'";
 $result = $mysqli->query($sql);
 
-#this thread works but not ideal, ex. if the tag is 'organ' this will still return things tagged "organizer"
-#might need to grab all, decode each JSON, and loop over the resulting array
-
 //Html table format see below commented out portion for example
 echo "<table style='width:100%; text-align:center'>";
 echo "<tr>
@@ -64,11 +61,7 @@ while ($row = $result->fetch_assoc()) { //for each thread
     // decode a string
     $obj = json_decode($thread);
 
-    $arrayPost = $obj->{'posts'};
-
-    //Thread itself index
     $postArray = $obj->posts;
-
 
     $length = count($postArray);
     $html = "";
