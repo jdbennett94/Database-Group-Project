@@ -4,7 +4,26 @@
     <meta charset="utf-8">
     <title>selectThreads.php</title>
   </head>
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
   <body>
+
+<h1>selectThreads.php</h1>
 
 <?php
 //MYSQL connection
@@ -19,7 +38,6 @@ if ($mysqli->connect_error) {
 $searchTag = $_POST['searchTag'];
 
 
-
 //Query statement array
 $sql = "SELECT * from Threads where tags like '%$searchTag%'";
 $result = $mysqli->query($sql);
@@ -31,14 +49,19 @@ $result = $mysqli->query($sql);
 echo "<table style='width:100%; text-align:center; border:1px'>";
 echo "<tr>
       <th>ThreadId</th>
-      <th>Thread</th>
+      <th>Thread Body</th>
+      <th>Thread Name</th>
+      <th>Thread Date</th>
       </tr>";
 
 //Each row of table now
 while ($row = $result->fetch_assoc()) {
 
     //Decode Json thread data
-    $thread = json_decode($row['thread']);
+    $thread = ($row['thread']);
+    // Use json_decode() function to
+    // decode a string
+    $obj = json_decode($thread);
 
     //Beginning of row
     echo "<tr>";
@@ -50,7 +73,17 @@ while ($row = $result->fetch_assoc()) {
 
     //Thread itself index
     echo "<td>";
-    echo $thread; //This is a dictionary not a string
+    echo $obj->{'body'};; //This is a dictionary not a string
+    echo "</td>";
+
+    //Thread itself index
+    echo "<td>";
+    echo $obj->{'name'};; //This is a dictionary not a string
+    echo "</td>";
+
+    //Thread itself index
+    echo "<td>";
+    echo $obj->{'datePosted'};; //This is a dictionary not a string
     echo "</td>";
 
     //End of row
