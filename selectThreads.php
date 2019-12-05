@@ -59,9 +59,11 @@ while ($row = $result->fetch_assoc()) {
 
     //Decode Json thread data
     $thread = ($row['thread']);
+
     // Use json_decode() function to
     // decode a string
     $obj = json_decode($thread);
+    $obj2 = json_decode($obj->{'posts'});
 
     //Beginning of row
     echo "<tr>";
@@ -73,17 +75,17 @@ while ($row = $result->fetch_assoc()) {
 
     //Thread itself index
     echo "<td>";
-    echo $obj->{'body'};; //This is a dictionary not a string
+    echo $obj2->{'body'};; //This is a dictionary not a string
     echo "</td>";
 
     //Thread itself index
     echo "<td>";
-    echo $obj->{'name'};; //This is a dictionary not a string
+    echo $obj2->{'name'};; //This is a dictionary not a string
     echo "</td>";
 
     //Thread itself index
     echo "<td>";
-    echo $obj->{'datePosted'};; //This is a dictionary not a string
+    echo $obj2->{'datePosted'};; //This is a dictionary not a string
     echo "</td>";
 
     //End of row
