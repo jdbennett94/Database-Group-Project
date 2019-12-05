@@ -55,7 +55,7 @@ echo "<tr>
       </tr>";
 
 //Each row of table now
-while ($row = $result->fetch_assoc()) {
+while ($row = $result->fetch_assoc()) { //for each thread
 
     //Decode Json thread data
     $thread = ($row['thread']);
@@ -63,35 +63,39 @@ while ($row = $result->fetch_assoc()) {
     // Use json_decode() function to
     // decode a string
     $obj = json_decode($thread);
-    $obj2 = json_decode($obj->{'posts'});
 
     $arrayPost = $obj->{'posts'};
 
-    //Beginning of row
-    echo "<tr>";
-
-    //Thread id index
-    echo "<td>";
-    echo $row['id'];
-    echo "</td>";
-
     //Thread itself index
-    echo "<td>";
-    echo $obj->{'posts'}; //This is a dictionary not a string
-    echo "</td>";
+    $postArray = $obj->posts;
 
-    //Thread itself index
-    echo "<td>";
-    echo $obj->{'posts'}; //This is a dictionary not a string
-    echo "</td>";
 
-    //Thread itself index
-    echo "<td>";
-    echo $obj->{'posts'}; //This is a dictionary not a string
-    echo "</td>";
+    $length = count($postArray);
+    $html = "";
+    for ($x = 0; $x < $length; $x++) { //for each post in a thread
 
-    //End of row
-    echo "</tr>";
+      //Beginning of row
+      $html .= "<tr>";
+
+      //Thread id index
+      $html .= "<td>";
+      $html .= $row['id'];
+      $html .= "</td>";
+
+      $html .= "<td>";
+      $html .= $postArray[$x]->body;
+      $html .= "</td>";
+      $html .= "<td>";
+      $html .= $postArray[$x]->name;
+      $html .= "<td>";
+      $html .= $postArray[$x]->datePosted;
+      $html .= "</td>";
+
+
+      //End of row
+      $html .= "</tr>";
+    }
+    echo $html;
 }
 //End of table
 echo "</table> ";
